@@ -487,6 +487,10 @@ def _import_lantern() -> Any:
 
     return Lantern
 
+def _import_waidb() -> Any:
+    from langchain_community.vectorstores.waidb import WAIDB
+
+    return WAIDB
 
 def __getattr__(name: str) -> Any:
     if name == "AnalyticDB":
@@ -639,6 +643,8 @@ def __getattr__(name: str) -> Any:
         return _import_neuraldb()
     elif name == "Lantern":
         return _import_lantern()
+    elif name == "WAIDB":
+        return _import_waidb()
     else:
         raise AttributeError(f"Could not find: {name}")
 
@@ -718,4 +724,5 @@ __all__ = [
     "VectorStore",
     "NeuralDBVectorStore",
     "Lantern",
+    "WAIDB",
 ]
