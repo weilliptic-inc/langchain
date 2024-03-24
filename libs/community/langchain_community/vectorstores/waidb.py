@@ -37,8 +37,14 @@ class WAIDB(VectorStore):
             # Create the collection
             if collection_metadata is None:
                 collection_metadata = DEFAULT_COLLECTION_METADATA
+            
+            collection_params = {}
+            collection_params['name'] = collection_name
+            collection_params['dimensions'] = 384
+            collection_params['index_type'] = "DISKANN"
+            collection_params['metric_type'] = "L2"
             self.collection_name = collection_name
-            self.collection_id = self.client.create_collection(name=collection_name, index=collection_metadata["index"])
+            self.collection_id = self.client.create_collection(params=collection_params)
             self.collection_context = {}
         except ImportError:
             raise ValueError(
